@@ -27,6 +27,7 @@
   :profiles
   {:dev
    {:dependencies [[binaryage/devtools "0.9.4"]
+                   [org.clojure/test.check "0.9.0"]
                    [re-frisk "0.5.0"]]
 
     :plugins      [[lein-figwheel "0.5.13"]]}}

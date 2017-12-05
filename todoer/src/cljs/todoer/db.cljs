@@ -1,4 +1,31 @@
-(ns todoer.db)
+(ns todoer.db
+  (:require
+    [clojure.test.check.generators :as gen]))
+
+(def nouns
+  (gen/elements
+    ["dog" "cat" "mouse"
+     "bitcoin" "tesla"
+     "laptop" "chain"
+     "house" "bicycle"]))
+
+(def verbs
+  (gen/elements
+    ["rent" "buy"
+     "sell" "tip toe on"
+     "encourage"
+     "terrorize"
+     "feed" "pet"]))
+
+(def articles
+  (gen/elements
+    ["his" "her" "the" "a"]))
+
+(def tasks
+  (->>
+    (gen/tuple verbs articles nouns)
+    (gen/fmap (partial clojure.string/join " "))))
 
 (def default-db
-  {:name "Todoer"})
+  {:name "Todoer"
+   :todos (gen/sample tasks 10)})

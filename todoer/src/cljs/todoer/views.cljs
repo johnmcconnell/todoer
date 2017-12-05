@@ -21,13 +21,26 @@
 (defn heading-panel
   []
   (let [n (re-frame/subscribe [::sbs/name])]
-    [:main.container {:role "main"}
-     [:div.starter-template
-      [:h1 @n]
-      [:p.lead "Welcome! Please send bitcoin..."]]]))
+    [:div
+     [:h1 @n]
+     [:p.lead "Welcome! Please send bitcoin..."]]))
+
+(defn todos
+  []
+  (let [todos (re-frame/subscribe [::sbs/todos])]
+    [:div.list-group
+     (for [todo @todos]
+       [:button.list-group-item.list-group-item-action
+        {:type :button}
+        todo])]))
 
 (defn main-panel []
   (let [n (re-frame/subscribe [::sbs/name])]
     [:div
-      [navbar-panel]
-      [heading-panel]]))
+     [navbar-panel]
+     [:main.container {:role "main"}
+      [:div.starter-template
+       [heading-panel]]
+      [:div.row
+       [:div.col-12
+        [todos]]]]]))

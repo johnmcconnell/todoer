@@ -5,3 +5,8 @@
  ::name
  (fn [db]
    (:name db)))
+
+(re-frame/reg-sub
+ ::todos
+ (fn [db]
+   (:todos db)))
