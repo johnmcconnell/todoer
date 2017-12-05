@@ -26,6 +26,12 @@
     (gen/tuple verbs articles nouns)
     (gen/fmap (partial clojure.string/join " "))))
 
+(defn ->task
+  [s]
+  {:edit? false
+   :text s})
+
 (def default-db
   {:name "Todoer"
-   :todos (gen/sample tasks 10)})
+   :todos (for [t (gen/sample tasks 10)]
+            (->task t))})

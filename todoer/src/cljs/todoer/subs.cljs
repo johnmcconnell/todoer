@@ -9,4 +9,7 @@
 (re-frame/reg-sub
  ::todos
  (fn [db]
-   (:todos db)))
+   (->>
+     db
+     :todos
+     (map-indexed vector))))
