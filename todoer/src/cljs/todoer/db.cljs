@@ -33,5 +33,5 @@
 
 (def default-db
   {:name "Todoer"
-   :todos (for [t (gen/sample tasks 10)]
-            (->task t))})
+   :todos (vec (for [t (gen/sample tasks 10)]
+                 (->task t)))})

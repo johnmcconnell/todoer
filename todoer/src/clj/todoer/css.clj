@@ -3,4 +3,6 @@
 
 (defstyles screen
   [:body
-   {:padding-top :5rem}])
+   {:padding-top :5rem}]
+  [:.cursor-pointer
+   {:cursor :pointer}])

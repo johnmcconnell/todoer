@@ -30,7 +30,7 @@
   []
   (let [todos (re-frame/subscribe [::sbs/todos])]
     [:div.list-group
-     (for [[i {:keys [text edit?] :as todo}] @todos]
+     (for [[i {:keys [text edit?] :as todo}] (reverse @todos)]
        (if edit?
          [:div.list-group-item.list-group-item-action
           {:key i}
@@ -42,7 +42,7 @@
            [:div.col-auto
             [:button.btn.btn-secondary
              {:type :button
-              :on-click #(re-frame/dispatch [::ets/cancel-edit-todo i])}
+              :on-click #(re-frame/dispatch [::ets/cancel-todo i])}
              "Cancel"]]
            [:div.col-auto
             [:button.btn.btn-primary
@@ -50,9 +50,24 @@
               :on-click #(re-frame/dispatch [::ets/save-todo i])}
              "Done"]]]]
          [:div.list-group-item.list-group-item-action
-          {:key i
-           :on-click #(re-frame/dispatch [::ets/edit-todo i])}
-          text]))]))
+          {:key i}
+          [:div.row
+           [:div.col-auto.col-md-8
+            {:on-click #(re-frame/dispatch [::ets/edit-todo i])}
+            text]
+           [:div.col-auto
+            [:button.btn.btn-success
+             {:type :button
+              :on-click #(re-frame/dispatch [::ets/finish-todo i])}
+             "Finish"]]]]))]))
+
+(defn todo-header
+  []
+  [:button.btn.btn-link.cursor-pointer
+     {:on-click #(re-frame/dispatch [::ets/new-todo])}
+   [:i.fa.fa-plus
+    {:aria-hidden :true}]
+   " Add Task"])
 
 (defn main-panel []
   (let [n (re-frame/subscribe [::sbs/name])]
@@ -61,6 +76,9 @@
      [:main.container {:role "main"}
       [:div.starter-template
        [heading-panel]]
+      [:div.row
+       [:div.col-auto
+        [todo-header]]]
       [:div.row
        [:div.col-12
         [todos]]]]]))
