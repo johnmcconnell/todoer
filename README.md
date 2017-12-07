@@ -14,7 +14,6 @@
 
 * Other Resources
   - AOC: fun
-  - Fun with clojure
 
 * What is this talk about?
   - An introduction to re-frame
@@ -83,6 +82,7 @@
   - Looks nice!
   - Demo
     - Discuss re-frisk
+  - https://github.com/frankiesardo/linked
   - About: ~250 lines of code
 
 * Re-frame
