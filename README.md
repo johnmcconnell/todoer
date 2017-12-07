@@ -1,63 +1,93 @@
 # A Dive Into Re-frame and Reactive Programming
 
-* About Me
+* Welcome
+  - Thank you for coming here
+  - I'm hoping you will get something out of it
+
+* Introductions
   - Working in the bay area the last 2 years
   - Mostly work with web based technology, but does
     whatever needs to get done: devops, backend, and frontend
-  - Has a masters wtih a focus in machine learning
 
-* Welcome
-  - Shoutout to fun with clojure
+* Before we begin
+  - Transition: I would like to discuss other resources.
+
+* Other Resources
+  - AOC: fun
+  - Fun with clojure
 
 * What is this talk about?
-  - Introduction to Re-frame
-  - Brief overview of reactive programming, plus a few other supplemental tools
+  - An introduction to re-frame
+  - Getting started with a TO-DO app
 
-* Example App
-  - Bare minimum, essentially static
-  - todo app
+* Getting Started
+ - Transition: Let's take a look at it in the browser
 
-* Add a View
-  - List of todos: ["act normal", "feed cat", "remember to breathe"]
+* Create a UI
 
-* Add a model
-  - The todos: [String]
-  - Make them random
+* Add Some Flare
+ - Office Space
 
-* Views to use the model
+* [Blank]
+ - 'resources/index.html'
 
-* Add events
-  - Edit Todo
-  - Delete Todo
-  - Add Todo, Cancel Todo
+* [Blank]
+ - 'views.cljs'
+ - Show core.cljs, render
+ - First main-panel
 
-* Add ajax and reg-fx
-  - Edit
-  - Delete
-  - Add
+* Flare Complete
+ - Branch: add-some-style
 
-* Go into more advanced subscriptions
-  - Calculate total amount of todos
-  - Average time to completion
+* Add the todos
+ - test.check
 
-* Compile time configuration with goog-define
-  - Different ajax endpoint
+* Model
+  - test.check allows you to generate values
 
-* Adding styles with garden
-  - example
+* View
+  - Simple iteration
 
-* Javascript interop
-  - define a javascript method
-  - call a javascript method
-  - create a javascript object
+* Subscriptions
+  - Uses the value from the database
 
-* What is re-frame?
-  - A reactive programming framework for writing SPAs in clojurescript
+* Implementing Edit Task
+  - Pretty good!
+  - Let's make these todo items editable
 
-* What is reactive programming?
-  - Handling concurrency via a propogation of calculations
+* Model
+  - We are adding an `edit?` flag
 
-## Notes
-- Show how to configure the environment
-- Show how to add css via garden
-- Re-frisk
+* Events
+  - edit: assoc the edit flag
+  - cancel-edit: dissoc the edit flag
+  - save: dissoc the edit flag, and save input
+
+* View
+  - There are now two different todo views
+
+* Now Implement Add and Finish
+  - Nice additions!
+  - Transition: How can we implement adding new todos and completing current todos?
+
+* Events
+  - finish: We have included javascript interop with pnotify.
+  - new-todo: include a `new?` flag
+  - change the cancel to remove if the task is `new?`
+  - change save to remove `new?`
+
+* View
+  - There are now two different todo views
+
+* Complete!
+  - Looks nice!
+  - Demo
+    - Discuss re-frisk
+  - About: ~250 lines of code
+
+* Re-frame
+  - Write your views in native clojurescript code and data structures
+  - Helps you manage your state by avoiding callbacks and mutating variables
+
+* Reactive Programming
+  - Changing the paradigm from procedurally calculating values, to values are dervived calculations from other values
